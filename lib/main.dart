@@ -13,12 +13,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: BlocProvider(
+    return BlocProvider(
         create: (context) => BackendBloc(),
-        child: const MyHomePage(title: 'Flutter Demo'),
-      ),
-      title: 'Flutter Demo',
+        child: MaterialApp(title: 'Flutter Demo',
+        home: const MyHomePage(title: 'Flutter Demo'),
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -30,7 +28,7 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.blue,
-      ),
+      ),)
     );
   }
 }
