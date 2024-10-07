@@ -9,7 +9,8 @@ class BackendBloc extends Cubit<String> {
   BackendBloc() : super('');
 
   Future<void> fetchData() async {
-    final response = await http.get(Uri.parse('https://api.sheety.co/71a928192913e9628d4d7159cceee299/workoutTracker/hoja1'));
+    final response =
+        await http.get(Uri.parse('http://127.0.0.1:5001/api/workouts'));
     if (response.statusCode == 200) {
       emit(response.body);
     } else {
@@ -17,15 +18,18 @@ class BackendBloc extends Cubit<String> {
     }
   }
 
-  Future<void> postData(DateTime date, String type, String reps, double weight, double duration) async {
+  Future<void> postData(String day, DateTime date, String type, String reps, double weight,
+      double duration) async {
     final response = await http.post(
-      Uri.parse('https://api.sheety.co/71a928192913e9628d4d7159cceee299/workoutTracker/hoja1'),
+      Uri.parse(
+          'http://127.0.0.1:5001/api/workouts'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, dynamic>{
+        'day': day,
         'date': DateFormat('yyyy-MM-dd').format(date),
-        'type': type,
+        'tipe': type,
         'reps': reps,
         'weight': weight,
         'duration': duration,
@@ -36,5 +40,5 @@ class BackendBloc extends Cubit<String> {
     } else {
       emit('Failed to post data');
     }
-  } 
+  }
 }

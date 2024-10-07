@@ -17,6 +17,7 @@ class WorkoutScreenState extends State<WorkoutScreen> {
   final TextEditingController _repsController = TextEditingController();
   final TextEditingController _weightController = TextEditingController();
   final TextEditingController _durationController = TextEditingController();
+  final TextEditingController _day = TextEditingController(text: 'Monday');
   DateTime _date = DateTime.now();
 
   @override
@@ -126,6 +127,7 @@ class WorkoutScreenState extends State<WorkoutScreen> {
           if (_formKey.currentState!.validate()) {
             final backendBloc = BlocProvider.of<BackendBloc>(context);
             backendBloc.postData(
+              _day.text,
               _date,
               _typeController.text,
               _repsController.text,
